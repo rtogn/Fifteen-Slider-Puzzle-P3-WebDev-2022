@@ -1,0 +1,49 @@
+body {
+    font-size: 14pt; 
+    text-align: center; 
+}
+ 
+#puzzlearea { 
+    height: 400px; 
+    margin: 0 auto; 
+    position: relative; 
+    width: 400px; 
+} 
+
+.highlight { 
+    border-color: red; 
+    cursor: pointer; 
+} 
+
+.puzzletile { 
+    background-image: url("background1.jpg");
+    border: 1px solid black; 
+    position: absolute; 
+} 
+
+.highlight, #output { 
+    color: red; 
+} 
+
+.puzzletile, #output { 
+    font-size: 40pt; 
+}
+.game_frame{
+	font-size: 1.6rem;
+	margin: auto;
+	width: 600px;
+	min-height: 200px;
+	border: 8px solid;
+	padding: 1rem;
+}
+.radial-repeating {
+	border-width: 20px;
+	border-image: repeating-radial-gradient(
+			circle at 10px,
+			turquoise,
+			pink 2px,
+			greenyellow 4px,
+			pink 2px
+		)
+		1;
+}
