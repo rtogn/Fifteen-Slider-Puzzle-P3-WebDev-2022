@@ -5,6 +5,7 @@
     let spaceColumn = 3;
     let WIDTH = 100;
 	let moves = 0;
+	let fresh_game = true;
     window.onload = function(){
         setSize();
 		document.getElementById("shufflebutton").onclick = shuffle;
@@ -13,29 +14,42 @@
     };
 	
 	function shuffle(){
-        for (let j = 0; j < 1000; j++) {
-            let neigbors = [];
-            let allPuzzles = document.getElementsByClassName("puzzletile");
-            for (let i = 0; i < allPuzzles.length; i++) {
-                if (moveable(allPuzzles[i]))
-                    neigbors.push(allPuzzles[i]);
-            }
-            let ranNum = getRandomIntInclusive(0, neigbors.length - 1);
-            let tempTop = neigbors[ranNum].style.top;
-            let tempLeft = neigbors[ranNum].style.left;
-            neigbors[ranNum].style.top = spaceRow * WIDTH + "px";
-            neigbors[ranNum].style.left = spaceColumn * WIDTH + "px";
-            neigbors[ranNum].id = "square_" + spaceRow + "_" + spaceColumn;
-            spaceRow = parseInt(tempTop) / WIDTH;
-            spaceColumn = parseInt(tempLeft) / WIDTH;
-        }
+		var end_game_prompt = false;
+		if (!fresh_game) {
+			var end_game_prompt = confirm("Are you sure you want to end this game?");
+		}
 		
+		if (fresh_game || end_game_prompt) {
+			for (let j = 0; j < 1000; j++) {
+				let neigbors = [];
+				let allPuzzles = document.getElementsByClassName("puzzletile");
+				for (let i = 0; i < allPuzzles.length; i++) {
+					if (moveable(allPuzzles[i]))
+						neigbors.push(allPuzzles[i]);
+				}
+				let ranNum = getRandomIntInclusive(0, neigbors.length - 1);
+				let tempTop = neigbors[ranNum].style.top;
+				let tempLeft = neigbors[ranNum].style.left;
+				neigbors[ranNum].style.top = spaceRow * WIDTH + "px";
+				neigbors[ranNum].style.left = spaceColumn * WIDTH + "px";
+				neigbors[ranNum].id = "square_" + spaceRow + "_" + spaceColumn;
+				spaceRow = parseInt(tempTop) / WIDTH;
+				spaceColumn = parseInt(tempLeft) / WIDTH;
+			}
+		
+			reset_score();
+		}
+    }
+	
+	function reset_score() {
+		// Reset music and score. 
+		fresh_game = false;
 		moves = 0;
 		document.getElementById("counter").innerHTML = moves;
 		var audio = document.getElementById("audio");
 		audio.currentTime = 0;
 		audio.play();
-    }
+	}
 	
 	function getRandomIntInclusive(min, max) {
         min = Math.ceil(min);
@@ -55,6 +69,7 @@
         }
         document.getElementById("controls").appendChild(select);
         document.getElementById("option4").selected = "selected";
+
     }
 
     function changeSize() {
@@ -67,6 +82,10 @@
             puzzlearea.removeChild(document.querySelector(".puzzletile"));
         }
         createSquares();
+				
+		var audio = document.getElementById("audio");
+		audio.pause();
+		fresh_game = true;
     }
 
     function createSquares() {
