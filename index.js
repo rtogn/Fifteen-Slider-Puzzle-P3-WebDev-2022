@@ -28,6 +28,9 @@
             spaceRow = parseInt(tempTop) / WIDTH;
             spaceColumn = parseInt(tempLeft) / WIDTH;
         }
+		
+		var audio = document.getElementById("audio");
+		audio.play();
     }
 	
 	function getRandomIntInclusive(min, max) {
