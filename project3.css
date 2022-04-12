@@ -47,3 +47,10 @@ body {
 		)
 		1;
 }
+
+.counterText {
+	float: left;
+	color: red;
+	font-size: 12pt;
+	padding: 0;
+}

@@ -4,6 +4,7 @@
     let spaceRow = 3;
     let spaceColumn = 3;
     let WIDTH = 100;
+	let moves = 0;
     window.onload = function(){
         setSize();
 		document.getElementById("shufflebutton").onclick = shuffle;
@@ -29,7 +30,10 @@
             spaceColumn = parseInt(tempLeft) / WIDTH;
         }
 		
+		moves = 0;
+		document.getElementById("counter").innerHTML = moves;
 		var audio = document.getElementById("audio");
+		audio.currentTime = 0;
 		audio.play();
     }
 	
@@ -108,6 +112,8 @@
     function helper() {
         if (moveable(this)) {
             makeAMove(this);
+			moves++;
+			document.getElementById("counter").innerHTML = moves;
             if (win()) {
                 document.getElementById("output").innerHTML = "Congratulations! You win!";
             } else {
