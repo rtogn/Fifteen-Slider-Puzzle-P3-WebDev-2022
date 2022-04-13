@@ -11,6 +11,23 @@
 <body>
     <h1>Fifteen Puzzle</h1>
 	
+		<div style="display:none;" id="alert">
+	<div class="detail_alert">
+		<div class="divtop">Congratulation!!!</div>
+		<img src="gj1.png" alt="logo" class="img2">
+		<div id ="msg" style="margin-top:20px;"></div> <!-- Display the alert detail-->
+		<br>
+		<form>
+		<input type="button" value="OK" class="button1" onclick="ok_check()"> <!-- Hit ok then call function to hide alert notice -->
+		</form>
+	</div>
+</div>
+<script>
+	function ok_check(){
+		var ok = document.getElementById("alert");
+		ok.style.display = "none";
+	}
+</script>
 	<div class="game_frame radial-repeating">
 	<p class="counterText">Moves used:</p>
 	<p id="counter" class="counterText">0</p>
@@ -29,6 +46,7 @@
 	<audio id="audio">
         <source src="sound/bensound-thelounge.mp3" type="audio/mpeg" id="track">
     </audio>
+
 </body>
 
 </html>

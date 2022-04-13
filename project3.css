@@ -54,3 +54,48 @@ body {
 	font-size: 12pt;
 	padding: 0;
 }
+#alert{
+	display: none;
+	position: fixed;
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgb(0,0,0);
+	background-color: rgba(0,0,0,0.4);
+}
+#msg{
+	color: purple;
+	font-size: 20px;
+	font-weight: bold;
+}
+.detail_alert{
+	background-color: #DBDF91;
+	border: 4px solid #DBDF91;
+	width: 25%;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 5vh;
+	border-radius: 10px 10px 0px 0px;
+}
+.img2{
+	width:200px;
+	height:120px;
+	margin: auto;
+}
+.button1{
+	cursor: pointer;
+	margin-top: 10px;
+	margin-bottom:10px;
+    width: 50px;
+}
+.divtop{
+	background-color: #DBDF91;
+    width: 100%;
+    height: 25px;
+    margin-bottom: 10px;
+	color: red;
+	font-size: 20px;
+	font-weight: bold;
+}

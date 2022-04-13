@@ -1,4 +1,4 @@
-(function () {
+(function() {
     "use strict";
     let NUM = 4;
     let spaceRow = 3;
@@ -50,6 +50,7 @@
 		audio.currentTime = 0;
 		audio.play();
 	}
+	
 	
 	function getRandomIntInclusive(min, max) {
         min = Math.ceil(min);
@@ -108,7 +109,10 @@
         }
     }
 
-
+	function playsound(){
+		let puzzle_sound = new Audio("win.mp3");
+		puzzle_sound.play();
+	}
 
 
 
@@ -134,12 +138,20 @@
 			moves++;
 			document.getElementById("counter").innerHTML = moves;
             if (win()) {
-                document.getElementById("output").innerHTML = "Congratulations! You win!";
+				var aLert = document.getElementById("alert");
+				if (aLert.style.display === "none"){
+					aLert.style.display = "block";
+				}
+			document.getElementById("msg").innerHTML = "You win";
+			playsound();
+			var audio = document.getElementById("audio");
+			audio.pause();
             } else {
                 document.getElementById("output").innerHTML = "";
             }
         }
     }
+	
 
     function makeAMove(div) {
         div.id = "square_" + spaceRow + "_" + spaceColumn;
@@ -169,7 +181,7 @@
             var row = Math.floor(i / NUM);
             var column = i % NUM;
             if (tiles[i].id != "square_" + row + "_" + column) {
-                console.log(tiles[i].id);
+                //console.log(tiles[i].id);
                 return false;
             }
         }
