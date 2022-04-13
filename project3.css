@@ -1,6 +1,7 @@
 body {
     font-size: 14pt; 
     text-align: center; 
+	background-color: Beige;
 }
  
 #puzzlearea { 
@@ -48,12 +49,10 @@ body {
 		1;
 }
 
-.counterText {
-	float: left;
-	color: red;
-	font-size: 12pt;
-	padding: 0;
+.counterText {	
+	font-family: "Lucida", monospace;
 }
+
 #alert{
 	display: none;
 	position: fixed;
@@ -98,4 +97,32 @@ body {
 	color: red;
 	font-size: 20px;
 	font-weight: bold;
+}
+
+.buttons {
+        background-color: seaGreen;
+        border-radius: 15px;
+        border: 7px double FloralWhite;
+        color: FloralWhite;
+        text-align: center;
+        font-size: 25px;
+        padding-left: 10px;
+		padding-right: 10px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+        cursor: pointer;
+        margin: 10px;
+}
+
+.title {
+		font-family: "Lucida", monospace;
+        background-color: seaGreen;
+        color: FloralWhite;
+        text-align: center;
+        font-size: 25px;
+        padding-left: 10px;
+		padding-right: 10px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+        margin: 10px;
 }
