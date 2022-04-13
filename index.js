@@ -48,6 +48,7 @@
 		document.getElementById("counter").innerHTML = moves;
 		var audio = document.getElementById("audio");
 		audio.currentTime = 0;
+		audio.volume = 0.05; // Reduce volume. May need to be adjusted if different track used. 
 		audio.play();
 	}
 	
@@ -111,6 +112,7 @@
 
 	function playsound(){
 		let puzzle_sound = new Audio("win.mp3");
+		puzzle_sound.volume = 0.2;
 		puzzle_sound.play();
 	}
 
@@ -161,6 +163,9 @@
         div.style.left = spaceColumn * WIDTH + "px";
         spaceRow = divRow;
         spaceColumn = divColumn;
+		
+		var tileFx = new Audio("sound/tile_move.mp3");//document.getElementById("tile_move");
+		tileFx.play();
     }
 
     function moveable(div) {
