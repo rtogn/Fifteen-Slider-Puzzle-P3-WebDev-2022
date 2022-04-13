@@ -1,7 +1,6 @@
 (function() {
     // Globals
     "use strict";
-<<<<<<< Updated upstream
     let NUM = 4;
     let spaceRow = 3;
     let spaceColumn = 3;
@@ -63,106 +62,22 @@
 
     function getRandomIntInclusive(min, max) {
         // Get random integer in given range (inclusive). 
-=======
-    var NUM = 4;
-    var spaceRow = 3;
-    var spaceColumn = 3;
-    var WIDTH = 100;
-	var moves = 0;
-	var fresh_game = true;
-    window.onload = function(){
-		create_Squares();
-		set_Size();
-		document.getElementById("shuffle").onclick = shuffle;
-		document.getElementById("select").onchange = changeSize;
-    };
-	
-	function create_Squares(){
-		for (var i = 1; i < NUM * NUM; i++){
-            var div = document.createElement("div");
-            div.className = "puzzletile";
-            div.innerHTML = i;
-            var row = Math.floor((i - 1) / NUM);
-            var column = (i - 1) % NUM;
-            var x = column * -1 * WIDTH + "px";
-            var y = row * -1 * WIDTH + "px";
-            div.style.height = WIDTH - 2 + "px";
-            div.style.height = WIDTH - 2 + "px";
-            div.style.width = div.style.height;
-            div.style.backgroundPosition = x + " " + y;
-            div.id = "square_" + row + "_" + column;
-            div.style.top = row * WIDTH + "px";
-            div.style.left = column * WIDTH + "px";
-            setEvents(div);
-            document.getElementById("puzzlearea").appendChild(div);
-        }
-    }
-	
-	function shuffle(){
-		var end_game_prompt = false;
-		if (!fresh_game) {
-			var end_game_prompt = confirm("Are you sure you want to end this game?");
-		}
-		
-		if (fresh_game || end_game_prompt){
-			for (let j = 0; j < 1000; j++){
-				let neigbors = [];
-				let allPuzzles = document.getElementsByClassName("puzzletile");
-				for (let i = 0; i < allPuzzles.length; i++){
-					if (moveable(allPuzzles[i]))
-						neigbors.push(allPuzzles[i]);
-				}
-				let ranNum = random_num(0, neigbors.length - 1);
-				let tempTop = neigbors[ranNum].style.top;
-				let tempLeft = neigbors[ranNum].style.left;
-				neigbors[ranNum].style.top = spaceRow * WIDTH + "px";
-				neigbors[ranNum].style.left = spaceColumn * WIDTH + "px";
-				neigbors[ranNum].id = "square_" + spaceRow + "_" + spaceColumn;
-				spaceRow = parseInt(tempTop) / WIDTH;
-				spaceColumn = parseInt(tempLeft) / WIDTH;
-			}
-		
-			reset_score();
-		}
-    }
-	
-	function reset_score() {
-		// Reset music and score. 
-		fresh_game = false;
-		moves = 0;
-		document.getElementById("counter").innerHTML = moves;
-		var audio = document.getElementById("audio");
-		audio.currentTime = 0;
-		audio.play();
-	}
-	
-	
-	function random_num(min, max){
->>>>>>> Stashed changes
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    function set_Size() {
-        var temp1 = document.createElement("select");
-        temp1.id = "select";
+    function setSize() {
+        var select = document.createElement("select");
+        select.id = "select";
         for (var i = 3; i < 7; i++) {
-<<<<<<< Updated upstream
             var option = document.createElement("option");
             option.innerHTML = i + " x " + i;
             option.value = i;
             option.id = "option" + i;
             select.appendChild(option);
-=======
-            var options = document.createElement("option");
-            options.innerHTML = i + " x " + i;
-            options.value = i;
-            options.id = "option" + i;
-            temp1.appendChild(options);
->>>>>>> Stashed changes
         }
-        document.getElementById("controls").appendChild(temp1);
+        document.getElementById("controls").appendChild(select);
         document.getElementById("option4").selected = "selected";
         select.classList.add("buttons");
     }
@@ -175,24 +90,34 @@
         spaceColumn = this.value - 1;
         WIDTH = parseInt(400 / this.value);
         var puzzlearea = document.getElementById("puzzlearea");
-        while (puzzlearea.contains(document.querySelector(".puzzletile"))){
+        while (puzzlearea.contains(document.querySelector(".puzzletile"))) {
             puzzlearea.removeChild(document.querySelector(".puzzletile"));
         }
-<<<<<<< Updated upstream
         createSquares();
         var audio = document.getElementById("audio");
         audio.pause();
         fresh_game = true;
-=======
-        create_Squares();
-				
-		var audio = document.getElementById("audio");
-		audio.pause();
-		fresh_game = true;
->>>>>>> Stashed changes
     }
 
-
+    function createSquares() {
+        for (var i = 1; i < NUM * NUM; i++) {
+            var div = document.createElement("div");
+            div.className = "puzzletile";
+            div.innerHTML = i;
+            var row = Math.floor((i - 1) / NUM);
+            var column = (i - 1) % NUM;
+            var x = column * -1 * WIDTH + "px";
+            var y = row * -1 * WIDTH + "px";
+            div.style.height = WIDTH - 2 + "px";
+            div.style.width = div.style.height;
+            div.style.backgroundPosition = x + " " + y;
+            div.id = "square_" + row + "_" + column;
+            div.style.top = row * WIDTH + "px";
+            div.style.left = column * WIDTH + "px";
+            setEvents(div);
+            document.getElementById("puzzlearea").appendChild(div);
+        }
+    }
 
     function playSound(sound_location, volume = 0.5) {
         // Generic method to play sound effects. Pass string to location with optional volume between 0.0 & 1.0
