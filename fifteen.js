@@ -7,24 +7,98 @@
     var space_Row = 3;
     var space_Column = 3;
     var size = 100;
+	var totalSeconds = 0;
+	var is_First = true;
+	var my_Timer;
 
     window.onload = function(){
 		create_tiles();
 		set_Size();
-		
-        document.getElementById("start_game").onclick = shuffle_tiles;
-		
-        document.getElementById("select").onchange = change_Size;
-        
+		document.getElementById("start_game").onclick = shuffle_tiles;
+		document.getElementById("bg").onclick = change_bg;
+		document.getElementById("bg1").onclick = change_bg1;
+		document.getElementById("bg2").onclick = change_bg2;
+		document.getElementById("bg3").onclick = change_bg3;
+		document.getElementById("bg4").onclick = change_bg4;
+		document.getElementById("bg5").onclick = change_bg5;
+		document.getElementById("bg6").onclick = change_bg6;
+		document.getElementById("bg7").onclick = change_bg7;     
+        document.getElementById("select").onchange = change_Size;      
     };
-
+	
+	//Change background onclick
+	function change_bg(){
+		let change_bg = document.getElementsByClassName("tiles");
+		for (var i = 0; i < (temp * temp)-1; i++){
+			change_bg[i].style.backgroundImage = "url('background.jpg')";
+		}
+	}
+	
+	function change_bg1(){
+		let change_bg = document.getElementsByClassName("tiles");
+		for (var i = 0; i < (temp * temp)-1; i++){
+			change_bg[i].style.backgroundImage = "url('bg1.jpg')";
+		}
+	}
+	
+	function change_bg2(){
+		let change_bg = document.getElementsByClassName("tiles");
+		for (var i = 0; i < (temp * temp)-1; i++){
+			change_bg[i].style.backgroundImage = "url('bg2.jpg')";
+		}
+	}
+	
+	function change_bg3(){
+		let change_bg = document.getElementsByClassName("tiles");
+		for (var i = 0; i < (temp * temp)-1; i++){
+			change_bg[i].style.backgroundImage = "url('bg3.jpg')";
+		}
+	}
+	
+	function change_bg4(){
+		let change_bg = document.getElementsByClassName("tiles");
+		for (var i = 0; i < (temp * temp)-1; i++){
+			change_bg[i].style.backgroundImage = "url('bg4.jpg')";
+		}
+	}
+	
+	function change_bg5(){
+		let change_bg = document.getElementsByClassName("tiles");
+		for (var i = 0; i < (temp * temp)-1; i++){
+			change_bg[i].style.backgroundImage = "url('bg5.jpg')";
+		}
+	}
+	
+	function change_bg6(){
+		let change_bg = document.getElementsByClassName("tiles");
+		for (var i = 0; i < (temp * temp)-1; i++){
+			change_bg[i].style.backgroundImage = "url('bg6.jpg')";
+		}
+	}
+	
+	function change_bg7(){
+		let change_bg = document.getElementsByClassName("tiles");
+		for (var i = 0; i < (temp * temp)-1; i++){
+			change_bg[i].style.backgroundImage = "url('bg7.jpg')";
+		}
+	}
+	
+	function countUpTimer(){
+		++totalSeconds;
+		let hour = Math.floor(totalSeconds / 3600);
+		let minute = Math.floor((totalSeconds - hour * 3600) / 60);
+		let seconds = totalSeconds - (hour * 3600 + minute * 60);
+		document.getElementById("timed").innerHTML = "Time: " + hour + ":" + minute + ":" + seconds;
+	}
+	
     function shuffle_tiles(){
         // Shuffles board (on click)
-        // Prompt if user is in the middle of the game and reset the score on verification. 
-		 document.getElementById("start_game").innerHTML = "Re-Shuffle";
+        // Prompt if user is in the middle of the game and reset the score on verification.
+		document.getElementById("start_game").innerHTML = "Re-Shuffle";
         var end_game_prompt = false;
         if (!fresh_game){
             var end_game_prompt = confirm("Are you sure you want to end this game?");
+			clearInterval(my_Timer);
         }
         if (fresh_game || end_game_prompt){
             for (let i = 0; i < 1000; i++){
@@ -43,9 +117,10 @@
                 space_Row = parseInt(var_top) / size;
                 space_Column = parseInt(var_Left) / size;
             }
-            reset_score();
+            reset_score();		
         }
     }
+	
 	
 	function create_tiles(){
         for (var i = 1; i < temp * temp; i++){
@@ -54,15 +129,24 @@
             div.innerHTML = i;
             var row = Math.floor((i - 1) / temp);
             var column = (i - 1) % temp;
-            var x = column * -1 * size + "px";
-            var y = row * -1 * size + "px";
-			div.style.width = size - 2 + "px";
+			//starting overwrite the style on each tile
+			//set width and height
+			div.style.width = size - 1 + "px";
             div.style.height = div.style.width;
-            div.style.backgroundPosition = x + " " + y;
+			//set position for each tile
+			var x = row * (-1) * size + "px";
+			var y = column * (-1) * size + "px";
+            div.style.backgroundPosition = y + " " + x;
+			//center the number of each tile
+			div.style.display = "flex";
+			div.style.alignItems = "center";
+			div.style.justifyContent = "center";
+			//show the position
             div.id = "pos" + row + "_" + column;
             div.style.top = row * size + "px";
             div.style.left = column * size + "px";
-            setEvents(div);
+			div.style.color = "#D1D1D1";
+            check_mouseover(div);
             document.getElementById("game_area").appendChild(div);
         }
     }
@@ -77,12 +161,15 @@
     function reset_score(){
         // Reset music and score when user changes boards. 
         fresh_game = false;
+		clearInterval(my_Timer);
+		my_Timer = setInterval(countUpTimer, 1000);
         moves = 0;
         set_MoveText();
         var audio = document.getElementById("audio");
         audio.currentTime = 0;
         audio.volume = 0.05; // Reduce volume. May need to be adjusted if different track used. 
         audio.play();
+		
     }
 
     function set_MoveText(){
@@ -95,16 +182,17 @@
     function set_Size(){
         var select_size = document.createElement("select");
         select_size.id = "select";
-        for (var i = 3; i < 7; i++){
+        for (var i = 1; i < 5; i++){
             var options = document.createElement("option");
-            options.innerHTML = i + " x " + i;
-            options.value = i;
-            options.id = "option" + i;
+            options.innerHTML = (i+2) + " x " + (i+2);
+            options.value = (i+2);
+            options.id = "option" + (i+2);
             select_size.appendChild(options);
         }
         document.getElementById("controls").appendChild(select_size);
-        document.getElementById("option4").selected = "selected";
         select_size.classList.add("buttons");
+		//selected 4x4 as default
+		document.getElementById("option4").selected = "selected";
     }
 
     function change_Size(){
@@ -133,17 +221,19 @@
         puzzle_sound.play();
     }
 
-    function setEvents(div){
+    function check_mouseover(div){
         // Highlight number in cell on mouseover if tile isMovable.
         div.onmouseover = function(){
             if (check_move(this)) {
-                this.classList.add("text1");
+                this.style.color = "red";
+				this.classList.add("text1");
             }
         };
         // Remove highlight effect when mouse moved off tile. 
         div.onmouseout = function(){
             if (check_move(this)){
-                this.classList.remove("text1");
+                this.style.color = "#D1D1D1";
+				this.classList.remove("text1");
             }
         };
         div.onclick = tiles_OnClick;

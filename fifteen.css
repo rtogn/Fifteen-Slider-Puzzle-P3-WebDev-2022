@@ -3,6 +3,7 @@ body {
     text-align: center; 
 	background-color: Beige;
 	margin: 0px;
+	font-family: "Lucida", monospace;
 }
  
 #game_area{
@@ -13,21 +14,22 @@ body {
 } 
 
 .text1{ 
-    border-color: red; 
     cursor: pointer;
-	color: red; 
+}
+.text1:hover{ 
+	box-shadow: 0px 0px 2px 2px #C31BBE;
 }
 
 #show{ 
-    font-size: 40pt;
-	color: red; 
-} 
+    font-size: 40px;
+	color: #C31BBE; 
+}
 
 .tiles{ 
     background-image: url("background.jpg");
     border: 1px solid black; 
     position: absolute;
-	font-size: 40pt;
+	font-size: 40px;
 }
 
 .game_frame{
@@ -84,11 +86,23 @@ body {
 	height:120px;
 	margin: auto;
 }
+.img1{
+	width: 100px;
+	height: 100px;
+}
 .button1{
 	cursor: pointer;
 	margin-top: 10px;
 	margin-bottom:10px;
     width: 50px;
+}
+.choose_bg{
+	padding: 0px;
+	cursor: pointer;
+}
+.choose_bg:hover{
+	-webkit-box-shadow: 5px 5px 15px 5px #FF8080, -9px 5px 15px 5px #FFE488, -7px -5px 15px 5px #8CFF85, 12px -5px 15px 5px #80C7FF, 12px 10px 15px 7px #E488FF, -10px 10px 15px 7px #FF616B, -10px -7px 27px 1px #8E5CFF, 5px 5px 15px 5px rgba(0,0,0,0); 
+	box-shadow: 5px 5px 15px 5px #FF8080, -9px 5px 15px 5px #FFE488, -7px -5px 15px 5px #8CFF85, 12px -5px 15px 5px #80C7FF, 12px 10px 15px 7px #E488FF, -10px 10px 15px 7px #FF616B, -10px -7px 27px 1px #8E5CFF, 5px 5px 15px 5px rgba(0,0,0,0);
 }
 .divtop{
 	background-color: #DBDF91;
@@ -139,4 +153,21 @@ body {
 		padding-top: 5px;
 		padding-bottom: 5px;
 		margin-top:0px;
+}
+.column1{
+  float: left;
+  width: 30%;
+}
+.column2 {
+  float: left;
+  width: 40%;
+}
+.column3 {
+  float: left;
+  width: 30%;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }

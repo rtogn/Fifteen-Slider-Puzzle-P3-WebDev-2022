@@ -29,14 +29,40 @@
 	}
 </script>
 
-<div class = "game_frame radial_repeating">
-	<p class = "counterText btnfake" id="counter">Moves used: 0</p>
-	<!-- p id="counter" class="counterText buttons">0</p -->
-	<div id="game_area">	</div>
+<div class="row">
 
-	<p id="controls">
-		<button id="start_game" class="buttons">Start Game</button>	
-	</p>
+	<div class="column1">
+		What do you want from me...
+	</div>
+	
+	<div class="column2">
+		<div class = "game_frame radial_repeating">
+			<div class = "counterText btnfake">
+				<p id="counter">Moves used: 0</p>
+				<p id="timed">Time: 0:0:0</p>
+			</div>
+			<div id="game_area"></div>
+
+			<p id="controls">
+				<button id="start_game" class="buttons">Start Game</button>	
+			</p>
+		</div>
+	</div>
+
+	<div class="column3">
+	<h3>Pick your background</h3>
+		<button id="bg"  class="choose_bg" onclick="change_bg()"><img src="background.jpg" class="img1"></button>	
+		<button id="bg1" class="choose_bg" onclick="change_bg1()"><img src="bg1.jpg" class="img1"></button>
+		<button id="bg2" class="choose_bg" onclick="change_bg2()"><img src="bg2.jpg" class="img1"></button>
+		<button id="bg3" class="choose_bg" onclick="change_bg3()"><img src="bg3.jpg" class="img1"></button>
+		<br>
+		<br>
+		<button id="bg4" class="choose_bg" onclick="change_bg4()"><img src="bg4.jpg" class="img1"></button>
+		<button id="bg5" class="choose_bg" onclick="change_bg5()"><img src="bg5.jpg" class="img1"></button>
+		<button id="bg6" class="choose_bg" onclick="change_bg6()"><img src="bg6.jpg" class="img1"></button>
+		<button id="bg7" class="choose_bg" onclick="change_bg7()"><img src="bg7.jpg" class="img1"></button>
+	</div>
+	
 </div>
 
 <div id="show">	</div>
