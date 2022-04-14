@@ -5,31 +5,31 @@ body {
 	margin: 0px;
 }
  
-#puzzlearea { 
+#game_area{
+	position: relative; 
+	width: 400px; 
     height: 400px; 
     margin: 0 auto; 
-    position: relative; 
-    width: 400px; 
 } 
 
-.highlight { 
+.text1{ 
     border-color: red; 
-    cursor: pointer; 
-} 
-
-.puzzletile { 
-    background-image: url("background1.jpg");
-    border: 1px solid black; 
-    position: absolute; 
-} 
-
-.highlight, #output { 
-    color: red; 
-} 
-
-.puzzletile, #output { 
-    font-size: 40pt; 
+    cursor: pointer;
+	color: red; 
 }
+
+#show{ 
+    font-size: 40pt;
+	color: red; 
+} 
+
+.tiles{ 
+    background-image: url("background.jpg");
+    border: 1px solid black; 
+    position: absolute;
+	font-size: 40pt;
+}
+
 .game_frame{
 	font-size: 1.6rem;
 	margin: auto;
@@ -38,7 +38,7 @@ body {
 	border: 8px solid;
 	padding: 1rem;
 }
-.radial-repeating {
+.radial_repeating {
 	border-width: 20px;
 	border-image: repeating-radial-gradient(
 			circle at 10px,
@@ -112,6 +112,19 @@ body {
 		padding-top: 5px;
 		padding-bottom: 5px;
         cursor: pointer;
+        margin: 10px;
+}
+.btnfake{
+        background-color: seaGreen;
+        border-radius: 15px;
+        border: 7px double FloralWhite;
+        color: FloralWhite;
+        text-align: center;
+        font-size: 25px;
+        padding-left: 10px;
+		padding-right: 10px;
+		padding-top: 5px;
+		padding-bottom: 5px;
         margin: 10px;
 }
 
