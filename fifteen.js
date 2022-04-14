@@ -116,8 +116,10 @@
                 neigbors[num].id = "pos" + space_Row + "_" + space_Column;
                 space_Row = parseInt(var_top) / size;
                 space_Column = parseInt(var_Left) / size;
+				clearInterval(my_Timer);
             }
-            reset_score();		
+			totalSeconds = 0;	
+            reset_score();
         }
     }
 	
@@ -161,7 +163,6 @@
     function reset_score(){
         // Reset music and score when user changes boards. 
         fresh_game = false;
-		clearInterval(my_Timer);
 		my_Timer = setInterval(countUpTimer, 1000);
         moves = 0;
         set_MoveText();
@@ -169,7 +170,6 @@
         audio.currentTime = 0;
         audio.volume = 0.05; // Reduce volume. May need to be adjusted if different track used. 
         audio.play();
-		
     }
 
     function set_MoveText(){
