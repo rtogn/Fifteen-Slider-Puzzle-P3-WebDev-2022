@@ -2,6 +2,7 @@ body {
     font-size: 14pt; 
     text-align: center; 
 	background-color: Beige;
+	margin: 0px;
 }
  
 #puzzlearea { 
@@ -124,5 +125,5 @@ body {
 		padding-right: 10px;
 		padding-top: 5px;
 		padding-bottom: 5px;
-        margin: 10px;
+		margin-top:0px;
 }
