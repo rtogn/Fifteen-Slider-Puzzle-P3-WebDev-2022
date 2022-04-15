@@ -14,72 +14,48 @@
     window.onload = function(){
 		create_tiles();
 		set_Size();
-		document.getElementById("start_game").onclick = shuffle_tiles;
-		document.getElementById("bg").onclick = change_bg;
-		document.getElementById("bg1").onclick = change_bg1;
-		document.getElementById("bg2").onclick = change_bg2;
-		document.getElementById("bg3").onclick = change_bg3;
-		document.getElementById("bg4").onclick = change_bg4;
-		document.getElementById("bg5").onclick = change_bg5;
-		document.getElementById("bg6").onclick = change_bg6;
-		document.getElementById("bg7").onclick = change_bg7;     
-        document.getElementById("select").onchange = change_Size;      
+		document.getElementById("start_game").onclick = shuffle_tiles;	
+		add_bg_events(8);
+        document.getElementById("select").onchange = change_Size;    
+		document.getElementById("bdy").style.backgroundColor = "Beige";
     };
 	
+	function add_bg_events(num_bg) {
+		// Sets up background change options where num_bg is the number of backgrounds labeled in the format
+		// "bg#". Since not scanning folder these images have to be in jpg format. Not the most ideal solution,
+		// but it works for the scope of the current situation. 
+		//Resulting HTML example: <button id="bg0"  class="choose_bg" onclick="change_bg('bg0')"><img src="img/bg0.jpg" class="img1"></button>	
+		
+		let col3 = document.getElementById("column3");
+		
+		for (var i = 0; i <= num_bg-1; i++) {	
+			var img_file = "bg" + i;
+			var img_file_F = img_file + ".jpg";
+			console.log(img_file_F);
+			
+			var img = document.createElement("img");
+			img.classList.add("img1");
+			img.src = "img/" + img_file_F;
+			
+			var buttn = document.createElement("button");
+			buttn.classList.add("choose_bg");
+			buttn.id = img_file;
+			buttn.appendChild(img);
+			buttn.addEventListener('click', change_bg.bind(this, img_file_F), false);
+			
+			col3.appendChild(buttn);
+		
+		}
+	}
+	
 	//Change background onclick
-	function change_bg(){
+	function change_bg(background){
 		let change_bg = document.getElementsByClassName("tiles");
+		let imgPath = "url(\"img/" + background + "\")";
+		console.log(imgPath);
 		for (var i = 0; i < (temp * temp)-1; i++){
-			change_bg[i].style.backgroundImage = "url('background.jpg')";
-		}
-	}
-	
-	function change_bg1(){
-		let change_bg = document.getElementsByClassName("tiles");
-		for (var i = 0; i < (temp * temp)-1; i++){
-			change_bg[i].style.backgroundImage = "url('bg1.jpg')";
-		}
-	}
-	
-	function change_bg2(){
-		let change_bg = document.getElementsByClassName("tiles");
-		for (var i = 0; i < (temp * temp)-1; i++){
-			change_bg[i].style.backgroundImage = "url('bg2.jpg')";
-		}
-	}
-	
-	function change_bg3(){
-		let change_bg = document.getElementsByClassName("tiles");
-		for (var i = 0; i < (temp * temp)-1; i++){
-			change_bg[i].style.backgroundImage = "url('bg3.jpg')";
-		}
-	}
-	
-	function change_bg4(){
-		let change_bg = document.getElementsByClassName("tiles");
-		for (var i = 0; i < (temp * temp)-1; i++){
-			change_bg[i].style.backgroundImage = "url('bg4.jpg')";
-		}
-	}
-	
-	function change_bg5(){
-		let change_bg = document.getElementsByClassName("tiles");
-		for (var i = 0; i < (temp * temp)-1; i++){
-			change_bg[i].style.backgroundImage = "url('bg5.jpg')";
-		}
-	}
-	
-	function change_bg6(){
-		let change_bg = document.getElementsByClassName("tiles");
-		for (var i = 0; i < (temp * temp)-1; i++){
-			change_bg[i].style.backgroundImage = "url('bg6.jpg')";
-		}
-	}
-	
-	function change_bg7(){
-		let change_bg = document.getElementsByClassName("tiles");
-		for (var i = 0; i < (temp * temp)-1; i++){
-			change_bg[i].style.backgroundImage = "url('bg7.jpg')";
+			
+			change_bg[i].style.backgroundImage = imgPath;
 		}
 	}
 	
