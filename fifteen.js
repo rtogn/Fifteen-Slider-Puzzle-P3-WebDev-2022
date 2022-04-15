@@ -98,7 +98,9 @@
         var end_game_prompt = false;
         if (!fresh_game){
             var end_game_prompt = confirm("Are you sure you want to end this game?");
-			clearInterval(my_Timer);
+			if(end_game_prompt){
+				clearInterval(my_Timer);
+			}
         }
         if (fresh_game || end_game_prompt){
             for (let i = 0; i < 1000; i++){
@@ -198,13 +200,12 @@
     function change_Size(){
 		// Handles adjusting the board size when user selects an option from the size menu.
 		document.getElementById("start_game").innerHTML = "Start Game"; // Reset start button when user selects a new size. 
-		var game_area = document.getElementById("game_area");
         temp = this.value;
         space_Row = this.value - 1;
         space_Column = this.value - 1;
         size = parseInt(400 / this.value);
-        while (game_area.contains(document.querySelector(".tiles"))){
-            game_area.removeChild(document.querySelector(".tiles"));
+        while (document.getElementById("game_area").contains(document.querySelector(".tiles"))){
+            document.getElementById("game_area").removeChild(document.querySelector(".tiles"));
         }
         create_tiles();
         var audio = document.getElementById("audio");
