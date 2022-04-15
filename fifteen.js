@@ -16,8 +16,7 @@
 		set_Size();
 		document.getElementById("start_game").onclick = shuffle_tiles;	
 		add_bg_events(8);
-        document.getElementById("select").onchange = change_Size;    
-		document.getElementById("bdy").style.backgroundColor = "Beige";
+        	document.getElementById("select").onchange = change_Size;    
     };
 	
 	function add_bg_events(num_bg) {
