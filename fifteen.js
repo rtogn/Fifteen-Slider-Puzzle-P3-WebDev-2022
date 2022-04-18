@@ -1,25 +1,25 @@
 (function() {
     // Globals
     "use strict";
-	var moves = 0;
-    var fresh_game = true;
-    var temp = 4;
-    var space_Row = 3;
-    var space_Column = 3;
-    var size = 100;
-	var totalSeconds = 0;
-	var is_First = true;
-	var my_Timer;
-	var hour = 0;
-	var minute = 0;
-	var seconds = 0;
+	var MOVES = 0;
+    var FRESH_GAME = true;
+    var TEMP = 4;
+    var SPACE_ROW = 3;
+    var SPACE_COLUMN = 3;
+    var SIZE = 100;
+	var TOTAL_SECONDS = 0;
+	var IS_FIRST = true;
+	var MY_TIMER;
+	var HOUR = 0;
+	var MINUTE = 0;
+	var SECONDS = 0;
 
     window.onload = function(){
 		create_tiles();
-		set_Size();
+		set_SIZE();
 		document.getElementById("start_game").onclick = shuffle_tiles;	
 		add_bg_events(8);
-		document.getElementById("select").onchange = change_Size;    
+		document.getElementById("select").onchange = change_SIZE;    
     };
 	
 	function add_bg_events(num_bg) {
@@ -55,18 +55,18 @@
 		let change_bg = document.getElementsByClassName("tiles");
 		let imgPath = "url(\"img/" + background + "\")";
 		console.log(imgPath);
-		for (var i = 0; i < (temp * temp)-1; i++){
+		for (var i = 0; i < (TEMP * TEMP)-1; i++){
 			
 			change_bg[i].style.backgroundImage = imgPath;
 		}
 	}
 	
 	function countUpTimer(){
-		++totalSeconds;
-		hour = Math.floor(totalSeconds / 3600);
-		minute = Math.floor((totalSeconds - hour * 3600) / 60);
-		seconds = totalSeconds - (hour * 3600 + minute * 60);
-		document.getElementById("timed").innerHTML = "Time: " + hour + ":" + minute + ":" + seconds;
+		++TOTAL_SECONDS;
+		HOUR = Math.floor(TOTAL_SECONDS / 3600);
+		MINUTE = Math.floor((TOTAL_SECONDS - HOUR * 3600) / 60);
+		SECONDS = TOTAL_SECONDS - (HOUR * 3600 + MINUTE * 60);
+		document.getElementById("timed").innerHTML = "Time: " + HOUR + ":" + MINUTE + ":" + SECONDS;
 	}
 	
     function shuffle_tiles(){
@@ -74,13 +74,13 @@
         // Prompt if user is in the middle of the game and reset the score on verification.
 		document.getElementById("start_game").innerHTML = "Re-Shuffle";
         var end_game_prompt = false;
-        if (!fresh_game){
+        if (!FRESH_GAME){
             var end_game_prompt = confirm("Are you sure you want to end this game?");
 			if(end_game_prompt){
-				clearInterval(my_Timer);
+				clearInterval(MY_TIMER);
 			}
         }
-        if (fresh_game || end_game_prompt){
+        if (FRESH_GAME || end_game_prompt){
             for (let i = 0; i < 1000; i++){
                 let all_tiles = document.getElementsByClassName("tiles");
 				let neigbors = [];
@@ -91,33 +91,33 @@
 				let num = rand_num(0, neigbors.length - 1);
                 let var_top = neigbors[num].style.top;
                 let var_Left = neigbors[num].style.left;
-				neigbors[num].style.left = space_Column * size + "px";
-                neigbors[num].style.top = space_Row * size + "px";
-                neigbors[num].id = "pos" + space_Row + "_" + space_Column;
-                space_Row = parseInt(var_top) / size;
-                space_Column = parseInt(var_Left) / size;
-				clearInterval(my_Timer);
+				neigbors[num].style.left = SPACE_COLUMN * SIZE + "px";
+                neigbors[num].style.top = SPACE_ROW * SIZE + "px";
+                neigbors[num].id = "pos" + SPACE_ROW + "_" + SPACE_COLUMN;
+                SPACE_ROW = parseInt(var_top) / SIZE;
+                SPACE_COLUMN = parseInt(var_Left) / SIZE;
+				clearInterval(MY_TIMER);
             }
-			totalSeconds = 0;	
+			TOTAL_SECONDS = 0;	
             reset_score();
         }
     }
 	
 	
 	function create_tiles(){
-        for (var i = 1; i < temp * temp; i++){
+        for (var i = 1; i < TEMP * TEMP; i++){
             var div = document.createElement("div");
             div.className = "tiles";
             div.innerHTML = i;
-            var row = Math.floor((i - 1) / temp);
-            var column = (i - 1) % temp;
+            var row = Math.floor((i - 1) / TEMP);
+            var column = (i - 1) % TEMP;
 			//starting overwrite the style on each tile
 			//set width and height
-			div.style.width = size - 1 + "px";
+			div.style.width = SIZE - 1 + "px";
             div.style.height = div.style.width;
 			//set position for each tile
-			var x = row * (-1) * size + "px";
-			var y = column * (-1) * size + "px";
+			var x = row * (-1) * SIZE + "px";
+			var y = column * (-1) * SIZE + "px";
             div.style.backgroundPosition = y + " " + x;
 			//center the number of each tile
 			div.style.display = "flex";
@@ -125,8 +125,8 @@
 			div.style.justifyContent = "center";
 			//show the position
             div.id = "pos" + row + "_" + column;
-            div.style.top = row * size + "px";
-            div.style.left = column * size + "px";
+            div.style.top = row * SIZE + "px";
+            div.style.left = column * SIZE + "px";
 			div.style.color = "#D1D1D1";
             check_mouseover(div);
             document.getElementById("game_area").appendChild(div);
@@ -142,9 +142,9 @@
 
     function reset_score(){
         // Reset music and score when user changes boards. 
-        fresh_game = false;
-        moves = 0;
-		my_Timer = setInterval(countUpTimer, 1000);
+        FRESH_GAME = false;
+        MOVES = 0;
+		MY_TIMER = setInterval(countUpTimer, 1000);
         set_MoveText();
         var audio = document.getElementById("audio");
         audio.currentTime = 0;
@@ -154,41 +154,41 @@
 
     function set_MoveText(){
         // Sets up text that contains win count and counter. 
-        let text = "Moves used: " + moves.toString();
+        let text = "MOVES used: " + MOVES.toString();
         document.getElementById("counter").innerHTML = text;
     }
 
 
-    function set_Size(){
-        var select_size = document.createElement("select");
-        select_size.id = "select";
+    function set_SIZE(){
+        var select_SIZE = document.createElement("select");
+        select_SIZE.id = "select";
         for (var i = 1; i < 9; i++){
             var options = document.createElement("option");
             options.innerHTML = (i+2) + " x " + (i+2);
             options.value = (i+2);
             options.id = "option" + (i+2);
-            select_size.appendChild(options);
+            select_SIZE.appendChild(options);
         }
-        document.getElementById("controls").appendChild(select_size);
-        select_size.classList.add("buttons");
+        document.getElementById("controls").appendChild(select_SIZE);
+        select_SIZE.classList.add("buttons");
 		//selected 4x4 as default
 		document.getElementById("option4").selected = "selected";
     }
 
-    function change_Size(){
-		// Handles adjusting the board size when user selects an option from the size menu.
-		document.getElementById("start_game").innerHTML = "Start Game"; // Reset start button when user selects a new size. 
-        temp = this.value;
-        space_Row = this.value - 1;
-        space_Column = this.value - 1;
-        size = parseInt(400 / this.value);
+    function change_SIZE(){
+		// Handles adjusting the board SIZE when user selects an option from the SIZE menu.
+		document.getElementById("start_game").innerHTML = "Start Game"; // Reset start button when user selects a new SIZE. 
+        TEMP = this.value;
+        SPACE_ROW = this.value - 1;
+        SPACE_COLUMN = this.value - 1;
+        SIZE = parseInt(400 / this.value);
         while (document.getElementById("game_area").contains(document.querySelector(".tiles"))){
             document.getElementById("game_area").removeChild(document.querySelector(".tiles"));
         }
         create_tiles();
         var audio = document.getElementById("audio");
         audio.pause();
-        fresh_game = true;
+        FRESH_GAME = true;
     }
 
 
@@ -225,7 +225,7 @@
         // If tile can be moved: make that move, update scoreboard and validate win state.
         if (check_move(this)){
             move(this);
-            moves++;
+            MOVES++;
             set_MoveText();
             if (check_WinState()){
                 var aLert = document.getElementById("alert");
@@ -233,15 +233,15 @@
                     aLert.style.display = "block";
                 }
                 document.getElementById("msg").innerHTML = "You win!!!" + 
-				"<br>" + "Your move: " + moves + 
-				"<br>" + "Your time: " + hour + ":" + minute + ":" + seconds;
+				"<br>" + "Your move: " + MOVES + 
+				"<br>" + "Your time: " + HOUR + ":" + MINUTE + ":" + SECONDS;
                 playSound("sound/win.mp3", 0.2);
                 var audio = document.getElementById("audio");
                 audio.pause();
-				totalSeconds = 0;
-				clearInterval(my_Timer);
+				TOTAL_SECONDS = 0;
+				clearInterval(MY_TIMER);
 				reset_score();
-				clearInterval(my_Timer);
+				clearInterval(MY_TIMER);
                 // Else: Display no change
             } 
 			else{
@@ -251,14 +251,14 @@
     }
 
     function move(div){
-        // Moves tile to next available space. 
-        div.id = "pos" + space_Row + "_" + space_Column;
-		var div_Column = parseInt(div.style.left) / size;
-        var div_Row = parseInt(div.style.top) / size;
-        div.style.top = space_Row * size + "px";
-        div.style.left = space_Column * size + "px";
-        space_Row = div_Row;
-        space_Column = div_Column;
+        // MOVES tile to next available space. 
+        div.id = "pos" + SPACE_ROW + "_" + SPACE_COLUMN;
+		var div_Column = parseInt(div.style.left) / SIZE;
+        var div_Row = parseInt(div.style.top) / SIZE;
+        div.style.top = SPACE_ROW * SIZE + "px";
+        div.style.left = SPACE_COLUMN * SIZE + "px";
+        SPACE_ROW = div_Row;
+        SPACE_COLUMN = div_Column;
         // Play sound effect for tile on move.
 		animate_tile(div);
         playSound("sound/tile_move.mp3");
@@ -272,13 +272,13 @@
 	
     function check_move(div){
         // Determines if tile is able to be moved (empty space)
-        var div_Row1 = parseInt(div.style.top) / size;
-        var div_Column1 = parseInt(div.style.left) / size;
-        if (space_Row == div_Row1){
-            return Math.abs(space_Column - div_Column1) == 1;
+        var div_Row1 = parseInt(div.style.top) / SIZE;
+        var div_Column1 = parseInt(div.style.left) / SIZE;
+        if (SPACE_ROW == div_Row1){
+            return Math.abs(SPACE_COLUMN - div_Column1) == 1;
         } 
-		else if (space_Column == div_Column1){
-            return Math.abs(space_Row - div_Row1) == 1;
+		else if (SPACE_COLUMN == div_Column1){
+            return Math.abs(SPACE_ROW - div_Row1) == 1;
         } 
 		else {
             return false;
@@ -289,8 +289,8 @@
         // Determines if current state is the win state. 
         var tiles = document.querySelectorAll(".tiles");
         for (var i = 0; i < tiles.length; i++){
-            var row = Math.floor(i / temp);
-            var column = i % temp;
+            var row = Math.floor(i / TEMP);
+            var column = i % TEMP;
             if (tiles[i].id != "pos" + row + "_" + column){
                 //console.log(tiles[i].id);
                 return false;
