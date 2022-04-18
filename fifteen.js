@@ -162,7 +162,7 @@
     function set_Size(){
         var select_size = document.createElement("select");
         select_size.id = "select";
-        for (var i = 1; i < 5; i++){
+        for (var i = 1; i < 9; i++){
             var options = document.createElement("option");
             options.innerHTML = (i+2) + " x " + (i+2);
             options.value = (i+2);
