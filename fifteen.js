@@ -10,13 +10,16 @@
 	var totalSeconds = 0;
 	var is_First = true;
 	var my_Timer;
+	var hour = 0;
+	var minute = 0;
+	var seconds = 0;
 
     window.onload = function(){
 		create_tiles();
 		set_Size();
 		document.getElementById("start_game").onclick = shuffle_tiles;	
 		add_bg_events(8);
-        	document.getElementById("select").onchange = change_Size;    
+		document.getElementById("select").onchange = change_Size;    
     };
 	
 	function add_bg_events(num_bg) {
@@ -60,9 +63,9 @@
 	
 	function countUpTimer(){
 		++totalSeconds;
-		let hour = Math.floor(totalSeconds / 3600);
-		let minute = Math.floor((totalSeconds - hour * 3600) / 60);
-		let seconds = totalSeconds - (hour * 3600 + minute * 60);
+		hour = Math.floor(totalSeconds / 3600);
+		minute = Math.floor((totalSeconds - hour * 3600) / 60);
+		seconds = totalSeconds - (hour * 3600 + minute * 60);
 		document.getElementById("timed").innerHTML = "Time: " + hour + ":" + minute + ":" + seconds;
 	}
 	
@@ -140,8 +143,8 @@
     function reset_score(){
         // Reset music and score when user changes boards. 
         fresh_game = false;
-		my_Timer = setInterval(countUpTimer, 1000);
         moves = 0;
+		my_Timer = setInterval(countUpTimer, 1000);
         set_MoveText();
         var audio = document.getElementById("audio");
         audio.currentTime = 0;
@@ -202,6 +205,7 @@
         div.onmouseover = function(){
             if (check_move(this)) {
                 this.style.color = "red";
+				//this.style.border = "1px solid red";
 				this.classList.add("text1");
             }
         };
@@ -209,6 +213,7 @@
         div.onmouseout = function(){
             if (check_move(this)){
                 this.style.color = "#D1D1D1";
+				//this.style.border = "1px solid black";
 				this.classList.remove("text1");
             }
         };
@@ -227,10 +232,16 @@
                 if (aLert.style.display === "none"){
                     aLert.style.display = "block";
                 }
-                document.getElementById("msg").innerHTML = "You win";
+                document.getElementById("msg").innerHTML = "You win!!!" + 
+				"<br>" + "Your move: " + moves + 
+				"<br>" + "Your time: " + hour + ":" + minute + ":" + seconds;
                 playSound("sound/win.mp3", 0.2);
                 var audio = document.getElementById("audio");
                 audio.pause();
+				totalSeconds = 0;
+				clearInterval(my_Timer);
+				reset_score();
+				clearInterval(my_Timer);
                 // Else: Display no change
             } 
 			else{
