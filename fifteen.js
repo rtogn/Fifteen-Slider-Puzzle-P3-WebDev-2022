@@ -260,9 +260,16 @@
         space_Row = div_Row;
         space_Column = div_Column;
         // Play sound effect for tile on move.
+		animate_tile(div);
         playSound("sound/tile_move.mp3");
     }
-
+	
+    function animate_tile(div) {
+        div.style.animation=null;
+        div.offsetHeight; // Triggers animation to restart.
+        div.style.animation="spin 0.25s ease";
+    }
+	
     function check_move(div){
         // Determines if tile is able to be moved (empty space)
         var div_Row1 = parseInt(div.style.top) / size;
