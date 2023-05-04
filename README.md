@@ -1,6 +1,6 @@
 # Fifteen Slider Puzzle, Project #3 Web Development @ GSU Spring 2022
 
-This project is website that implements a 'fifteen' slider puzzle game using primarily JavaScript. The user's goal is to re-create a shuffled image by
+This project implemented a 'fifteen' slider puzzle game using primarily JavaScript. The user's goal is to re-create a shuffled image by
 sliding numbered squares on a board with only one available hole. The primary goal was to gain experience with JavaScript and CSS animations.
 
 # Languages Used
@@ -13,6 +13,10 @@ sliding numbered squares on a board with only one available hole. The primary go
 * Re-shuffle board
 * Game music and other sound Fx
 * Board size/difficulty selection from 3x3 to 10x10
+* Win screen popup with metrics when puzzle is solved 
+
+# How to use
+This website can be run locally. Simply download the files and open 'fifteen.html' in any web browser with JavaScript capability. 
 
 ## Main page
 ![image](https://user-images.githubusercontent.com/60898339/236237660-a2872347-1eb2-456c-bf57-8a46e1cd2fcc.png)
